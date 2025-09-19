@@ -9,6 +9,7 @@ Neste repositório poderás encontrar o seguinte conteúdo:
 - resolução de [testes](testes/) e exames de anos anteriores
 - [slides](slides/) com a matéria abordada na cadeira
 - enunciados de [trabalhos](trabalhos/) práticos de vários anos
+- [bibliotecas](bibliotecas/) de software em Haskell
 
 ---
 
