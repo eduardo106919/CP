@@ -9,7 +9,7 @@
 left=25mm,top=20mm]{geometry}
 
 
-\title{Cálculo de Programas \\ Resolução - Ficha 01}
+\title{Cálculo de Programas \\ Resolução - Ficha 02}
 \author{Eduardo Freitas Fernandes}
 \date{2025}
 
@@ -91,16 +91,16 @@ left=25mm,top=20mm]{geometry}
 	\noindent \underline{\textbf{Exercício 2}}
 	
 \begin{center}
-	\begin{minipage}{0.6\textwidth}
+	\begin{minipage}{0.65\textwidth}
 		\begin{mdframed}
 			\[
 			\begin{aligned}
-				xor \cdot (and \times id) ((a, b), c)
+				xor \cdot (and \times id) \  ((a, b), c)
 				= \  &\{\text{def. composição}\}\\
-				&xor ((and \times id) ((a, b), c))\\
+				&xor ((and \times id) \  ((a, b), c))\\
 				= \  &\{\text{(F1)}\}\\
-				&xor(and (a, b), id c)\\
-				= \  &\{\text{def. and e id}\}\\
+				&xor(and (a, b), \ id \  c)\\
+				= \  &\{\text{def. and, def. id}\}\\
 				&xor(a \land b, c)\\
 				= \  &\{\text{def. xor}\}\\
 				&(a \land b) \oplus c
