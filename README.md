@@ -6,10 +6,11 @@ Conteúdo abordado na unidade curricular Cálculo de Programas no ano letivo 202
 
 Neste repositório poderás encontrar o seguinte conteúdo:
 - resolução das [fichas](fichas/) práticas
-- resolução de [testes](testes/) e exames de anos anteriores
-- [slides](slides/) com a matéria abordada na cadeira
-- enunciados de [trabalhos](trabalhos/) práticos de vários anos
 - [bibliotecas](bibliotecas/) de software em Haskell
+
+---
+
+Os conteúdos lecionados nesta unidade curricular estão disponibilizados no website da cadeira: https://haslab.github.io/CP/
 
 ---
 
