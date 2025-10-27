@@ -10,7 +10,7 @@ Neste repositório poderás encontrar o seguinte conteúdo:
 
 ---
 
-Os conteúdos lecionados nesta unidade curricular estão disponibilizados no website da cadeira: https://haslab.github.io/CP/
+Os conteúdos lecionados nesta unidade curricular estão disponíveis no website da cadeira: [Cálculo de Programas](https://haslab.github.io/CP/).
 
 ---
 
