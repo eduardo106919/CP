@@ -5,6 +5,7 @@
 \usepackage{minted}
 \usepackage{mdframed}
 \usepackage{mathabx}
+\usepackage{stmaryrd}
 
 \usepackage[twoside,verbose,body={16cm,24cm},
 left=25mm,top=20mm]{geometry}
@@ -24,9 +25,6 @@ left=25mm,top=20mm]{geometry}
 \begin{document}
 	
 	\maketitle
-	
-	
-	
 	
 	\begin{minipage}{0.45\textwidth}
 		\noindent \underline{\textbf{Exercício 1}}
@@ -223,6 +221,47 @@ ghci> -- f é a função que calcula o factorial
 	\newpage
 	
 	\noindent \underline{\textbf{Exercício 8}}\\
+	
+	\[
+	\begin{aligned}
+		\begin{cases}
+			for \ b \ i \ 0 = i \\
+			for \ b \ i \ (n+1) = b (for \ b \ i \ n)
+		\end{cases}
+		\equiv
+		\begin{cases}
+			(for \ b \ i) \cdot \underline{0} = \underline{i} \\
+			(for \ b \ i) \cdot succ = b \cdot for \ b \ i
+		\end{cases}
+	\end{aligned}
+	\]
+	
+	\[
+	\begin{aligned}
+		\begin{cases}
+			a + 0 = a \\
+			a + (n+1) = 1 + (a + n)
+		\end{cases}
+		\equiv
+		\begin{cases}
+			(a+) \cdot \underline{0} = \underline{a} \\
+			(a+) \cdot succ = succ \cdot (a+)
+		\end{cases}
+	\end{aligned}
+	\]
+	
+	\[
+	\begin{aligned}
+		for \ b \ i &= \llparenthesis \, [\underline{i}, b] \, \rrparenthesis \\
+		(a+) &= \llparenthesis \, [\underline{a}, succ] \, \rrparenthesis
+	\end{aligned}
+	\]
+	
+	\[
+	\begin{aligned}
+		(a+) = for \ succ \ a
+	\end{aligned}
+	\]
 	
 	\noindent \underline{\textbf{Exercício 9}}
 \begin{minted}{c}
