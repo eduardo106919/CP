@@ -4,10 +4,9 @@
 \usepackage{amsmath}
 \usepackage{minted}
 \usepackage{mdframed}
-\usepackage{mathabx}
 \usepackage{stmaryrd}
 \usepackage[all]{xy}
-
+\usepackage{amsfonts}
 
 
 \usepackage[twoside,verbose,body={16cm,24cm},
@@ -161,22 +160,22 @@ left=25mm,top=20mm]{geometry}
 		\end{cases}\\
 		\equiv \ &\{\text{pointwise, Def. comp}\}\\
 		&\begin{cases}
-			tar \ Empty = [[]] \\
+			tar \ Empty = [[ \ ]] \\
 			tar (Node (x,(l,r))) = g \ (x, (tar \ l, tar \ r))
 		\end{cases}\\
 		\equiv \ &\{\text{Def. g}\}\\
 		&\begin{cases}
-			tar \ Empty = [[]] \\
+			tar \ Empty = [[ \ ]] \\
 			tar \ (Node (x,(l,r))) = (map \ cons \cdot lstr) (x, tar \ l ++ tar \ r)
 		\end{cases}\\
 		\equiv \ &\{\text{Def. comp, Def. lstr}\}\\
 		&\begin{cases}
-			tar \ Empty = [[]] \\
+			tar \ Empty = [[ \ ]] \\
 			tar \ (Node (x,(l,r))) = map \ cons [(x,a) | a \leftarrow tar \ l ++ \ tar \ r]
 		\end{cases}\\
 		\equiv \ &\{\text{Def. comp, Def. lstr}\}\\
 		&\begin{cases}
-			tar \ Empty = [[]] \\
+			tar \ Empty = [[ \ ]] \\
 			tar \ (Node (x,(l,r))) = [cons \ (h,t) | (h,t) \leftarrow [(x,a) | a \leftarrow tar \ l ++ \  tar \ r]]
 		\end{cases}\\
 	\end{aligned}
@@ -248,9 +247,9 @@ left=25mm,top=20mm]{geometry}
 	\begin{aligned}
 		& \llparenthesis \, [zero, succ \cdot \pi_2] \, \rrparenthesis = [\!( (id + \pi_2) \cdot out_* )\!] \\
 		\equiv \ &\{\text{Universal-ana}\}\\
-		& out_{\mathcal{N}_0} \cdot \llparenthesis \, [zero, succ \cdot \pi_2] \, \rrparenthesis = \textbf{F}_{\mathcal{N}_0} \llparenthesis \, [zero, succ \cdot \pi_2] \, \rrparenthesis \cdot (id + \pi_2) \cdot out_* \\
+		& out_{\mathbb{N}_0} \cdot \llparenthesis \, [zero, succ \cdot \pi_2] \, \rrparenthesis = \textbf{F}_{\mathbb{N}_0} \llparenthesis \, [zero, succ \cdot \pi_2] \, \rrparenthesis \cdot (id + \pi_2) \cdot out_* \\
 		\equiv \ &\{\text{Shunt-left, Shunt-right, Functor dos naturais}\}\\
-		& \llparenthesis \, [zero, succ \cdot \pi_2] \, \rrparenthesis \cdot in_* = in_{\mathcal{N}_0} \cdot (id + \llparenthesis \, [zero, succ \cdot \pi_2] \, \rrparenthesis) \cdot (id + \pi_2) \\
+		& \llparenthesis \, [zero, succ \cdot \pi_2] \, \rrparenthesis \cdot in_* = in_{\mathbb{N}_0} \cdot (id + \llparenthesis \, [zero, succ \cdot \pi_2] \, \rrparenthesis) \cdot (id + \pi_2) \\
 		\equiv \ &\{\text{Functor-+, Def. in, Cancelamento-cata}\}\\
 		& [zero, succ \cdot \pi_2] \cdot (id + id \times \llparenthesis \, [zero, succ \cdot \pi_2] \, \rrparenthesis) = [zero, succ] \cdot (id + \llparenthesis \, [zero, succ \cdot \pi_2] \, \rrparenthesis \cdot \pi_2) \\
 		\equiv \ &\{\text{Absorção-+}\}\\
@@ -262,6 +261,8 @@ left=25mm,top=20mm]{geometry}
 		\end{cases}
 	\end{aligned}
 	\]
+	
+	\newpage
 	
 	\noindent \underline{\textbf{Exercício 7}}\\
 \begin{minted}{haskell}
