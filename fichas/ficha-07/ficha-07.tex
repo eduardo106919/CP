@@ -4,8 +4,9 @@
 \usepackage{amsmath}
 \usepackage{minted}
 \usepackage{mdframed}
-\usepackage{mathabx}
 \usepackage{stmaryrd}
+\usepackage[all]{xy}
+\usepackage{amsfonts}
 
 \usepackage[twoside,verbose,body={16cm,24cm},
 left=25mm,top=20mm]{geometry}
@@ -283,8 +284,53 @@ ghci> rep (2*) 0 3
 ghci> rep ("a"++) 10 "b"
 "aaaaaaaaaab"
 \end{minted}
-	
-	\noindent \textbf{TODO:} tipo de $rep \ f$.\\
+\[
+\begin{aligned}
+	\underline{id}:& \ B \rightarrow A^A \\
+	f:& \ C \rightarrow D \\
+	(f \cdot):& \ C^E \rightarrow D^E \\
+\end{aligned}
+\]
+
+\noindent Temos de ter igualdade de tipos, ou seja:
+\[
+\begin{aligned}
+	A^A = D^E \implies
+	\begin{cases}
+		A = E \\
+		A = D
+	\end{cases}
+\end{aligned}
+\]
+
+\noindent Logo:
+\[
+\begin{aligned}
+	\underline{id}:& \ B \rightarrow A^A \\
+	f:& \ C \rightarrow A \\
+	(f \cdot):& \ C^A \rightarrow A^A \\
+\end{aligned}
+\]
+
+
+	\[
+	\begin{aligned}
+		\xymatrix@C=2cm{
+			\mathbb{N}_0
+			\ar[d]_-{rep \ f}
+			\ar@/^1pc/[r]^-{out}
+			&
+			1 + \mathbb{N}_0
+			\ar[d]^{id \, + \, rep \ f}
+			\ar@/^1pc/[l]^-{in}
+			\\
+			A^A
+			&
+			1 + C^A
+			\ar[l]^-{[\underline{id}, (f \cdot)]}
+		}
+	\end{aligned}
+	\]
 	
 	\noindent \underline{\textbf{Exercício 8}}
 	
