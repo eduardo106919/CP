@@ -1,0 +1,182 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[portuguese]{babel}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{minted}
+\usepackage{mdframed}
+\usepackage{stmaryrd}
+\usepackage[all]{xy}
+\usepackage{amsfonts}
+
+\usepackage[twoside,verbose,body={16cm,24cm},
+left=25mm,top=20mm]{geometry}
+
+
+\title{Cálculo de Programas \\ Resolução - Ficha 11}
+\author{Eduardo Freitas Fernandes}
+\date{2025}
+
+
+\begin{document}
+	
+	\maketitle
+	
+	\noindent \underline{\textbf{Exercício 1}}
+	\[
+	\begin{aligned}
+		& mirror = \llparenthesis \, in_2 \cdot \alpha \, \rrparenthesis \\
+		\equiv \ &\{\text{Def. $in_2$ , Def. $\alpha$}\}\\
+		& mirror = \llparenthesis \, [Leaf, Fork] \cdot (id + swap) \, \rrparenthesis \\
+		\equiv \ &\{\text{Absorção-+}\}\\
+		& mirror = \llparenthesis \, [Leaf, Fork \cdot swap] \, \rrparenthesis \\
+		\equiv \ &\{\text{Universal-cata}\}\\
+		& mirror \cdot in_{LTree} = [Leaf, Fork \cdot swap] \cdot (id + (mirror \times mirror)) \\
+		\equiv \ &\{\text{Def. $in_{LTree}$, Fusão-+, Absorção-+, Eq-+}\}\\
+		&\begin{cases}
+			mirror \cdot Leaf = Leaf \\
+			mirror \cdot Fork = Fork \cdot swap \cdot (mirror \times mirror)
+		\end{cases}\\
+		\equiv \ &\{\text{pointwise, Def. composição}\}\\
+		&\begin{cases}
+			mirror \ (Leaf \ x) = Leaf \ x \\
+			mirror \ (Fork \ (l, r)) = Fork \ (swap \ ( mirror \ l, mirror \ r))
+		\end{cases}\\
+		\equiv \ &\{\text{Def. swap}\}\\
+		&\begin{cases}
+			mirror \ (Leaf \ x) = Leaf \ x \\
+			mirror \ (Fork \ (l, r)) = Fork \ ( mirror \ r, mirror \ l)
+		\end{cases}
+	\end{aligned}
+	\]
+	
+	\noindent \underline{\textbf{Exercício 2}}
+	\[
+	\begin{aligned}
+		& ........................................................ \\
+		\impliedby \ &\{\text{Fusão-cata}\}\\
+		& ........................................................ \\
+		\equiv \ &\{\text{$\llparenthesis \, g \, \rrparenthesis \cdot in_2 = g \cdot G \ \llparenthesis \, g \, \rrparenthesis$ (F1)}\}\\
+		& ........................................................ \\
+		\impliedby \ &\{\text{Leibniz}\}\\
+		& ........................................................ \\
+		\impliedby \ &\{\text{Generalização de $\llparenthesis \, g \, \rrparenthesis$ em f}\}\\
+		& ........................................................ \\
+	\end{aligned}
+	\]
+	
+	\newpage
+	
+	\noindent \underline{\textbf{Exercício 3}}\\
+	\[
+	\begin{aligned}
+		& mirror = \llparenthesis \, g \, \rrparenthesis \\
+		& mirror = \llparenthesis \, in_2 \cdot \alpha \, \rrparenthesis
+	\end{aligned}
+	\]
+	
+	\[
+	\begin{aligned}
+		& \llparenthesis \, g \, \rrparenthesis = \llparenthesis \, in_2 \cdot \alpha \, \rrparenthesis \\
+		\equiv \ &\{\text{Def. $in_2$, Def. $\alpha$}\}\\
+		& \llparenthesis \, g \, \rrparenthesis = \llparenthesis \, [Leaf, Fork] \cdot (id + swap) \, \rrparenthesis \\
+		\equiv \ &\{\text{Absorção-+}\}\\
+		& \llparenthesis \, g \, \rrparenthesis = \llparenthesis \, [Leaf, Fork \cdot swap] \, \rrparenthesis \\
+	\end{aligned}
+	\]
+	
+	\noindent Podemos então dizer que $g = [Leaf, Fork \cdot swap]$. Precisamos também de provar também que $id = \llparenthesis \, g \cdot \alpha \, \rrparenthesis$.
+	\[
+	\begin{aligned}
+		& id = \llparenthesis \, g \cdot \alpha \, \rrparenthesis \\
+		\equiv \ &\{\text{Def. g, Def. $\alpha$}\}\\
+		& id = \llparenthesis \, [Leaf, Fork \cdot swap] \cdot (id + swap) \, \rrparenthesis \\
+		\equiv \ &\{\text{Absorção-+}\}\\
+		& id = \llparenthesis \, [Leaf, Fork \cdot swap \cdot swap] \, \rrparenthesis \\
+		\equiv \ &\{\text{$swap \cdot swap = id$}\}\\
+		& id = \llparenthesis \, [Leaf, Fork] \, \rrparenthesis \\
+		\equiv \ &\{\text{$[Leaf, Fork] = in_{LTree}$}\}\\
+		& id = \llparenthesis \, in_{LTree} \, \rrparenthesis \\
+		\equiv \ &\{\text{Reflexão-cata}\}\\
+		& True \\
+	\end{aligned}
+	\]
+	
+	\noindent Podemos então provar que $mirror$ é o seu próprio isomorfismo:
+	\[
+	\begin{aligned}
+		& \llparenthesis \, g \, \rrparenthesis \cdot \llparenthesis \, in_2 \cdot \alpha \, \rrparenthesis = \llparenthesis \, g \cdot \alpha \, \rrparenthesis \\
+		\impliedby \ &\{\text{(F3)}\}\\
+		& G \ f \cdot \alpha = \alpha \cdot F \ f \\
+		\equiv \ &\{\text{G f = F f = id + f $\times$ f}\}\\
+		& (id + f \times f) \cdot (id + swap) = (id + swap) \cdot (id + f \times f) \\
+		\equiv \ &\{\text{Functor-+}\}\\
+		& (id + (f \times f) \cdot swap) = (id + swap \cdot (f \times f)) \\
+	\end{aligned}
+	\]
+	
+	\noindent Através da propriedade grátis da função $swap$ (i.e: $swap \cdot (f \times g) = (g \times f) \cdot swap$), podemos garantir a veracidade desta propriedade.\\
+	
+	
+	\noindent \underline{\textbf{Exercício 4}}
+	\[
+	\begin{aligned}
+		& \llparenthesis \, g \, \rrparenthesis \cdot T \ f = \llparenthesis \, g \cdot B \ (f, id) \, \rrparenthesis \\
+		\equiv \ &\{\text{Def-map-cata}\}\\
+		& \llparenthesis \, g \, \rrparenthesis \cdot \llparenthesis \, in \cdot B \ (f, id) \, \rrparenthesis = \llparenthesis \, g \cdot B \ (f, id) \, \rrparenthesis \\
+		\impliedby \ &\{\text{(F3)}\}\\
+		& G \ f \cdot B \ (f, id) = B \ (f, id) \cdot F \ f \\
+		\equiv \ &\{\text{?????}\}\\
+		& B \ (id, f) \cdot B \ (f, id) = B \ (f, id) \cdot B \ (id, f) \\
+		\equiv \ &\{\text{Functor-id-F (para Bi Functores)}\}\\
+		& B \ (f, f) = B \ (f, f) \\
+	\end{aligned}
+	\]
+	
+	
+	\noindent \underline{\textbf{Exercício 5}}
+	\[
+	\begin{aligned}
+		& while \ p \ f \ g = tailr \ ((g + f) \cdot (\neg \cdot p) ?) \\
+		\equiv \ &\{\text{Def. tailr}\}\\
+		& while \ p \ f \ g = \llbracket join, ((g + f) \cdot (\neg \cdot p) ?) \rrbracket \\
+		\equiv \ &\{\text{$\llbracket f, g \rrbracket = f \cdot F \llbracket f, g \rrbracket \cdot g$}\}\\
+		& while \ p \ f \ g = join \cdot F \ (while \ p \ f \ g) \cdot ((g + f) \cdot (\neg \cdot p) ?) \\
+		\equiv \ &\{\text{Def. join, Def. Functor}\}\\
+		& while \ p \ f \ g = [id, id] \cdot (id + (while \ p \ f \ g)) \cdot ((g + f) \cdot (\neg \cdot p) ?) \\
+		\equiv \ &\{\text{Absorção-+ (2$\times$)}\}\\
+		& while \ p \ f \ g = [g, (while \ p \ f \ g) \cdot f] \cdot (\neg \cdot p) ? \\
+		\equiv \ &\{\text{Def. Condicional de McCarthy}\}\\
+		& while \ p \ f \ g = (\neg \cdot p) \rightarrow g, (while \ p \ f \ g) \cdot f \\
+		\equiv \ &\{\text{pointwise}\}\\
+		& while \ p \ f \ g \ x = \textbf{if} \ not \ (p \ x) \ \textbf{then} \ g \ x \ \textbf{else} \ while \ p \ f \ g \ (f \ x)
+	\end{aligned}
+	\]
+	
+	
+	\noindent \underline{\textbf{Exercício 6}}
+	\[
+	\begin{aligned}
+		& ........................................................ \\
+		\equiv \ &\{\text{Def. tailr, Def. hylomorfismo}\}\\
+		& ........................................................ \\
+		\impliedby \ &\{\text{Leibniz}\}\\
+		& ........................................................ \\
+		\impliedby \ &\{\text{Fusão-ana, Def. Functor}\}\\
+		& ........................................................ 
+	\end{aligned}
+	\]
+	
+	\noindent \underline{\textbf{Exercício 7}}\\
+	\[
+	\begin{aligned}
+		& f \bullet [g, h] = [f \bullet g, f \bullet h] \\
+		\equiv \ &\{\text{(F9) (3$\times$)}\}\\
+		& \mu \cdot T \ f \cdot [g, h] = [\mu \cdot T \ f \cdot g, \mu \cdot T \ f \cdot h] \\
+		\equiv \ &\{\text{Fusão-+}\}\\
+		& [\mu \cdot T \ f \cdot g, \mu \cdot T \ f \cdot h] = [\mu \cdot T \ f \cdot g, \mu \cdot T \ f \cdot h] \\
+	\end{aligned}
+	\]
+	
+	
+	
+\end{document}
