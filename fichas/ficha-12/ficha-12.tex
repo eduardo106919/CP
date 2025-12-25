@@ -1,0 +1,283 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[portuguese]{babel}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{minted}
+\usepackage{mdframed}
+\usepackage{stmaryrd}
+\usepackage[all]{xy}
+\usepackage{amsfonts}
+
+
+\usepackage[twoside,verbose,body={16cm,24cm},
+left=25mm,top=20mm]{geometry}
+
+
+\title{Cálculo de Programas \\ Resolução - Ficha 12}
+\author{Eduardo Freitas Fernandes}
+\date{2025}
+
+
+\begin{document}
+	
+	\maketitle
+
+	\noindent \underline{\textbf{Exercício 1}}\\
+	
+	\begin{minipage}{0.5\textwidth}
+		\[
+		\begin{aligned}
+			& \mu = id \bullet id \\
+			\equiv \ &\{\text{ (F6) }\}\\
+			& \mu = \mu \cdot T \ id \cdot id \\
+			\equiv \ &\{\text{ Natural-id, Functor-id-T (46) }\}\\
+			& \mu = \mu \cdot id \\
+			\equiv \ &\{\text{ Natural-id }\}\\
+			& \mu = \mu \\
+		\end{aligned}
+		\]
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.5\textwidth}
+		\[
+		\begin{aligned}
+			& (f \cdot g) \bullet h = f \bullet (T \ g \cdot h) \\
+			\equiv \ &\{\text{ (F6) twice }\}\\
+			& \mu \cdot T \ (f \cdot g) \cdot h = \mu \cdot (T \ f) \cdot (T \ g) \cdot h \\
+			\equiv \ &\{\text{ Functor-T (45) }\}\\
+			& \mu \cdot (T \ f) \cdot (T \ g) \cdot h = \mu \cdot (T \ f) \cdot (T \ g) \cdot h \\
+		\end{aligned}
+		\]
+	\end{minipage}
+	
+	\begin{minipage}{0.5\textwidth}
+		\[
+		\begin{aligned}
+			& f \bullet u = f \\
+			\equiv \ &\{\text{ (F6) }\}\\
+			& \mu \cdot T \ f \cdot u = f \\
+			\equiv \ &\{\text{ (F4) }\}\\
+			& \mu \cdot u \cdot f = f \\
+			\equiv \ &\{\text{ (F2) }\}\\
+			& id \cdot f = f \\
+			\equiv \ &\{\text{ Natural-id }\}\\
+			& f = f \\
+		\end{aligned}
+		\]
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.5\textwidth}
+		\[
+		\begin{aligned}
+			& f = u \bullet f \\
+			\equiv \ &\{\text{ (F6) }\}\\
+			& f = \mu \cdot T \ u \cdot f \\
+			\equiv \ &\{ \text{ (F2) }\}\\
+			& f = id \cdot f \\
+			\equiv \ &\{\text{ Natural-id }\}\\
+			& f = f \\
+		\end{aligned}
+		\]
+	\end{minipage}
+	
+	\[
+	\begin{aligned}
+		& T \ f = (u \cdot f) \bullet id \\
+		\equiv \ &\{\text{ (F6) }\}\\
+		& T \ f = \mu \cdot T \ (u \cdot f) \cdot id \\
+		\equiv \ &\{\text{ Natural-id, Functor-T (45) }\}\\
+		& T \ f = \mu \cdot (T \ u) \cdot (T \ f) \\
+		\equiv \ &\{\text{ (F2) }\}\\
+		& T \ f = id \cdot T \ f \\
+		\equiv \ &\{\text{ Natural-id }\}\\
+		& T \ f = T \ f \\
+	\end{aligned}
+	\]
+	
+	\noindent \underline{\textbf{Exercício 2}}
+	\[
+	\begin{aligned}
+		& discollect = lstr \bullet id \\
+		\equiv \ &\{\text{ Composição Monádica }\}\\
+		& discollect = concat \cdot T \ lstr \cdot id \\
+		\equiv \ &\{\text{ Natural-id, Def. concat, Absorção-cata }\}\\
+		& discollect = \llparenthesis \, [nil, conc] \cdot B \ (lstr, id) \, \rrparenthesis \\
+		\equiv \ &\{\text{ Universal-cata, Bi-Functor de Listas }\}\\
+		& discollect \cdot [nil, cons] = [nil, conc] \cdot (id + lstr \times id) \cdot (id + id \times discollect) \\
+		\equiv \ &\{\text{ Fusão-+, Absorção-+ twice, Eq-+ }\}\\
+		& \begin{cases}
+			discollect \cdot nil = nil \\
+			discollect \cdot cons = conc \cdot (lstr \times id) \cdot (id \times discollect)
+		\end{cases}\\
+		\equiv \ &\{\text{ Functor-$\times$ }\}\\
+		& \begin{cases}
+			discollect \cdot nil = nil \\
+			discollect \cdot cons = conc \cdot (lstr \times discollect)
+		\end{cases}\\
+		\equiv \ &\{\text{ pointfree, Def. conc, Def. lstr }\}\\
+		& \begin{cases}
+			discollect \ [ \ ] = [ \ ] \\
+			discollect \ ((a, l) : as) = t \mathbin{+\!\!+} discollect \ as \ \textbf{where} \ t = [(a, b) \ | \ b \leftarrow l]
+		\end{cases}\\
+	\end{aligned}
+	\]
+	
+	\noindent \underline{\textbf{Exercício 3}}
+	
+	\[
+	\begin{aligned}
+		& \mu \cdot \mu = \mu \cdot T \ \mu \\
+		\equiv \ &\{\text{ pointwise, Def. comp }\}\\
+		& \mu \ ( \mu \ (((x,y), z), w)) = \mu \ ((\mu \times id) \ (((x,y), z), w)) \\
+		\equiv \ &\{\text{ Def. $\mu$, Def-$\times$, Def. id}\}\\
+		& \mu \ ((x,y), z + w) = \mu \ ((x, y + z), w) \\
+		\equiv \ &\{\text{ Def. $\mu$ }\}\\
+		& (x, y + z + w) = (x, y + z + w) \\
+	\end{aligned}
+	\]
+	
+	\begin{minipage}{0.5\textwidth}
+		\[
+		\begin{aligned}
+			& \mu \cdot u = id \\
+			\equiv \ &\{\text{ pointwise, Def. comp }\}\\
+			& \mu \ (u \ (x, y)) = id \ (x,y) \\
+			\equiv \ &\{\text{ Def. $\mu$, Def. id }\}\\
+			& \mu \ ((x, y), 0) = (x,y) \\
+			\equiv \ &\{\text{ Def. $\mu$ }\}\\
+			& (x, y + 0) = (x,y) \\
+		\end{aligned}
+		\]
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.5\textwidth}
+		\[
+		\begin{aligned}
+			& \mu \cdot T \ u = id \\
+			\equiv \ &\{\text{ pointwise, Def. comp, Def. T u }\}\\
+			& \mu \ ((u \times id) \ (x, y)) = id \ (x, y) \\
+			\equiv \ &\{\text{ Def-$\times$, Def. u, Def. id }\}\\
+			& \mu \ ((x, 0) y) = (x,y) \\
+			\equiv \ &\{\text{ Def. $\mu$ }\}\\
+			& (x, 0 + y) = (x,y) \\
+		\end{aligned}
+		\]
+	\end{minipage}
+
+	\newpage
+	
+	\noindent \underline{\textbf{Exercício 4}}\\
+	
+	\begin{minipage}{0.5\textwidth}
+		\[
+		\begin{aligned}
+			& \mu \cdot T \ u = id \\
+			\equiv \ &\{\text{ Def. $\mu$ }\}\\
+			& \llparenthesis \, [id, in \cdot i_2] \, \rrparenthesis \cdot T \ u = id \\
+			\equiv \ &\{\text{ Absorção-cata }\}\\
+			& \llparenthesis \, [id, in \cdot i_2] \cdot B \ (u, id) \, \rrparenthesis = id \\
+			\equiv \ &\{\text{ Universal-cata, Def. Bi-Functor }\}\\
+			& [id, in \cdot i_2] \cdot (u + G \ id) \cdot F \ id =  in \\
+			\equiv \ &\{\text{ Functor-id-F twice, Absorção-+ }\}\\
+			& [u, in \cdot i_2] = in \\
+			\equiv \ &\{\text{ Def. u }\}\\
+			& [in \cdot i_1, in \cdot i_2] = in \\
+			\equiv \ &\{\text{ Fusão-+, Reflexão-+ }\}\\
+			& in = in \\
+		\end{aligned}
+		\]
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.5\textwidth}
+		\[
+		\begin{aligned}
+			& \mu \cdot u = id \\
+			\equiv \ &\{\text{ Def. $\mu$, Def. u }\}\\
+			& \llparenthesis \, id, in \cdot i_2 \, \rrparenthesis \cdot in \cdot i_1 = id \\
+			\equiv \ &\{\text{ Cancelamento-cata }\}\\
+			& [id, in \cdot i_2] \cdot F \ \mu \cdot i_1 = id \\
+			\equiv \ &\{\text{ Base-cata, Def. Functor }\}\\
+			& [id, in \cdot i_2] \cdot (id + G \ \mu) \cdot i_1 = id \\
+			\equiv \ &\{\text{ Absorção-+ }\}\\
+			& [id, in \cdot i_2 \cdot G \ \mu] \cdot i_1 = id \\
+			\equiv \ &\{\text{ Cancelamento-+ }\}\\
+			& id = id \\
+		\end{aligned}
+		\]
+	\end{minipage}\\
+	
+	\[
+	\begin{aligned}
+		& \mu \cdot \mu = \mu \cdot T \ \mu \\
+		\equiv \ &\{\text{ Def. $\mu$ }\}\\
+		& \mu \cdot \mu = \llparenthesis \, [id, in \cdot i_2] \, \rrparenthesis \cdot T \ \mu \\
+		\equiv \ &\{\text{ Absorção-cata, Def. $\mu$ }\}\\
+		& \mu \cdot \llparenthesis \, [id, in \cdot i_2] \, \rrparenthesis = \llparenthesis \, [id, in \cdot i_2] \cdot B \ (\mu, id) \, \rrparenthesis \\
+		\impliedby \ &\{\text{ Fusão-cata }\}\\
+		& \mu \cdot [id, in \cdot i_2] = [id, in \cdot i_2] \cdot B \ (\mu, id) \cdot F \ \mu \\
+		\equiv \ &\{\text{ Fusão-+, $F \ f = B \ (id, f)$,  $B \ (f,g)=f+G \ g$ (twice), Absorção-+ }\}\\
+		& [\mu, \mu \cdot in \cdot i_2] = [\mu, in \cdot i_2 \cdot G \ \mu] \\
+		\equiv \ &\{\text{ Eq-+ }\}\\
+		&\begin{cases}
+			\mu = \mu \\
+			\mu \cdot in \cdot i_2 = in \cdot i_2 \cdot G \ \mu
+		\end{cases}\\
+		\equiv \ &\{\text{ $\mu = \llparenthesis \, ... \, \rrparenthesis$, Cancelamento-cata }\}\\
+		&\begin{cases}
+			\mu = \mu \\
+			[id, in \cdot i_2] \cdot F \ \mu \cdot i_2 = in \cdot i_2 \cdot G \ \mu
+		\end{cases}\\
+		\equiv \ &\{\text{ $F \ f = id + G \ f$, Absorção-+, Cancelamento-+ }\}\\
+		&\begin{cases}
+			\mu = \mu \\
+			in \cdot i_2 \cdot G \ \mu = in \cdot i_2 \cdot G \ \mu
+		\end{cases}\\
+	\end{aligned}
+	\]
+	
+	\newpage
+	
+	\noindent \underline{\textbf{Exercício 5}}
+	
+	\[
+	\xymatrix@C=3cm{
+		A \ar[r]^{in \cdot i_1} & LTree \ a & LTree \ (LTree \ A) \ar[l]_{\llparenthesis \, [id, in \cdot i_2] \, \rrparenthesis}
+	}
+	\]
+	\noindent O Functor Base de LTree é $B \ (X, Y) = X + Y \times Y$, logo podemos deduzir o functor G como $G \ Y = Y \times Y$.\\
+	
+	\noindent Para $ G \ Y = 1 $ temos o Functor Base de Maybe $ B \ (X,Y) = X + 1 $.\\
+	
+	\noindent Para $ G \ Y = O \times Y^* $ temos o Functor Base de Árvores de Expressão $ B \ (X,Y) = X + O \times Y^* $ (presente na biblioteca \texttt{Exp.hs}).\\
+	
+	
+	\noindent \underline{\textbf{Exercício 6}}
+	\[
+	\begin{aligned}
+		& sequence = \llparenthesis \, [return, id] \cdot (nil + \lfloor cons \rfloor) \, \rrparenthesis \\
+		\equiv \ &\{\text{ Universal-cata }\}\\
+		& sequence \cdot [nil, cons] = [return, id] \cdot (nil + \lfloor cons \rfloor) \cdot (id + id \times sequence) \\
+		\equiv \ &\{\text{ Fusão-+, Absorção-+ twice, Eq-+ }\}\\
+		& \begin{cases}
+			sequence \cdot nil = return \cdot nil \\
+			sequence \cdot cons = \lfloor cons \rfloor \cdot (id \times sequence)
+		\end{cases} \\
+		\equiv \ &\{\text{ pointwise, Def-$\times$ }\}\\
+		& \begin{cases}
+			sequence \ [ \ ] = return \ [ \ ] \\
+			sequence \ (h : t) = \lfloor cons \rfloor \ (h, sequence \ t)
+		\end{cases} \\
+		\equiv \ &\{\text{ Def. $\lfloor f \rfloor$, Def. cons }\}\\
+		& \begin{cases}
+			sequence \ [ \ ] = return \ [ \ ] \\
+			sequence \ (h : t) = \textbf{do} \ \{ a \leftarrow h; \ b \leftarrow sequence \ y; \ return \ (a:b) \}
+		\end{cases} \\
+	\end{aligned}
+	\]
+	
+	
+	
+	
+	
+\end{document}
