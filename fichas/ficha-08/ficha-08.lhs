@@ -509,9 +509,9 @@ lcbr(
 \just\equiv{ fokkinga }
 |
 lcbr(
-     f . either (const 0) succ = either (const 1) ((1+) . p1) . fF split f insg
+     f . either (const 0) succ = either (const 1) ((1+) . p1) . fF (split f insg)
 )(
-     insg . either (const 0) succ = either nil cons . fF split f insg
+     insg . either (const 0) succ = either nil cons . fF (split f insg)
 )
 |
 \just\equiv{ def. functor |Nat0|, fusão-|+|, absorção-|+|, eq-|+| }
@@ -649,6 +649,8 @@ lcbr(
 \end{eqnarray*}
 
 \noindent A função |f1| seleciona os elementos de uma lista nas posições pares, e a função |f2| seleciona os elementos de uma lista nas posições ímpares.
+
+\newpage
 
 \noindent {\large \textbf{Exercício 7}}
 
