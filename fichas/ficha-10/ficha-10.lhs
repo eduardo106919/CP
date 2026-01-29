@@ -170,17 +170,17 @@ main = undefined
 \begin{eqnarray*}
 \xymatrix@@C=3cm@@R=1cm{
     |Seq(A)|
-           \ar[d]_-{| anaList g |}
            \ar@@/^1pc/[r]^-{| outList |}
 &
-    |A + square((LTree A))|
-           \ar[d]^{| id + id >< anaList g |}
+    |1 + A >< Seq(A)|
            \ar@@/^1pc/[l]^-{| inList |}
 \\
-     |A|
+     |Seq(A)|
+          \ar[u]^-{| anaList g |}
           \ar@@/_1pc/[r]_-{| g |}
 &
-     |A + square(A)|
+     |1 + A >< Seq(A)|
+     \ar[u]_{| id + id >< anaList g |}
 }
 \end{eqnarray*}
 
@@ -191,17 +191,17 @@ main = undefined
 \begin{eqnarray*}
 \xymatrix@@C=3cm@@R=1cm{
     |Nat0|
-           \ar[d]_-{| uncurry theta |}
            \ar@@/^1pc/[r]^-{| outNat |}
 &
     |1 + Nat0|
-           \ar[d]^{| id + anaNat g |}
            \ar@@/^1pc/[l]^-{| inNat |}
 \\
      |Nat0 >< Nat0|
           \ar@@/_1pc/[r]_-{| g |}
+          \ar[u]^-{| uncurry theta |}
 &
      |1 + Nat0 >< Nat0|
+     \ar[u]_{| id + anaNat g |}
 }
 \end{eqnarray*}
 \begin{code}
